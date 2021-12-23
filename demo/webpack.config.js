@@ -11,7 +11,7 @@ const inDev = NODE_ENV === 'development' || NODE_ENV === 'test'
 
 module.exports = {
   mode: inDev ? 'development' : 'production',
-  devtool: inDev ? 'dev-tool-cheap-source-map' : 'source-map',
+  devtool: inDev ? 'eval-cheap-source-map' : 'source-map',
   entry: [
     'core-js/stable',
     'regenerator-runtime/runtime',
@@ -26,7 +26,6 @@ module.exports = {
 
   plugins: [
     new CaseSensitivePathsPlugin(),
-    new webpack.HashedModuleIdsPlugin(),
     new HTMLWebpackPlugin({
       alwaysWriteToDisk: true,
       minify: true,
@@ -59,9 +58,5 @@ module.exports = {
       },
     ],
   },
-  node: {
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty',
-  },
+  node: false,
 }
